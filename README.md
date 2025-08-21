@@ -8,13 +8,13 @@
 	- pip install -U langchain-community
 	- pip install -U langchain-ollama
 	- pip install -U langchain-chroma
-	- pip install chromadb
-	- pip install pypdf
+	- pip install -U chromadb
+	- pip install -U pypdf
 
 3. Install and Configure Ollama
-	Download and install Ollama to run models locally. (https://ollama.com/download)
-	Pull and Run Required Models
-		Embedding model (for text embeddings) (https://ollama.com/library/nomic-embed-text)
+   	1. Download and install Ollama to run models locally. (https://ollama.com/download)
+	2. Pull and Run Required Models
+		1. Embedding model (for text embeddings) (https://ollama.com/library/nomic-embed-text)
 			- ollama pull nomic-embed-text
-   		LLM model (for language generation) (https://ollama.com/library/mistral)
+   		2. LLM model (for language generation) (https://ollama.com/library/mistral)
 			- ollama run mistral
