@@ -1,7 +1,9 @@
 import argparse
 from langchain_chroma import Chroma
-from langchain.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama import OllamaLLM
+from langchain_perplexity import ChatPerplexity
+from pydantic import SecretStr
 
 from get_embedding_function import get_embedding_function
 
@@ -40,9 +42,17 @@ def query_rag(query_text: str):
     prompt = prompt_template.format(context=context_text, question=query_text)
     # print(prompt)
 
-    model = OllamaLLM(model="mistral")
+    # using Perplexity model
+    model = ChatPerplexity(
+        temperature=0,
+        api_key=SecretStr("PERPLEXITY_API_KEY"),
+        model="sonar-pro", timeout=None
+    )
+    # using local Ollama Mistral model
+    # model = OllamaLLM(model="mistral")
+
     response_text = model.invoke(prompt)
-    print(context_text+"\n\n")
+    # print(context_text+"\n\n")
 
     sources = [doc.metadata.get("id", None) for doc, _score in results]
     formatted_response = f"Response: {response_text}\nSources: {sources}"
